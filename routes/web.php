@@ -17,9 +17,9 @@ use App\Image;
 
 Route::get('/', function () {
     $images = Image::all();
-    foreach($images as $image){
-        /*echo('<pre>');
-        var_dump($image);*/
+    /*foreach($images as $image){
+        //echo('<pre>');
+        //var_dump($image);
         echo $image->image_path."<br>";
         echo $image->description."<br>";
         echo $image->user->name.' '.$image->user->surname."<br>";
@@ -37,6 +37,10 @@ Route::get('/', function () {
 
         echo "<hr>";
     }
-    die();
+    die();*/
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
