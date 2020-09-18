@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
@@ -12,6 +14,7 @@ class UserController extends Controller
     }
 
     public function update(Request $request){
+
         //Conseguir usuario identificado
         $user = \Auth::user();//damos el valor del objeto identificado, que esta en una sesión, etc.
         $id = $user->id;
@@ -35,6 +38,17 @@ class UserController extends Controller
         $user->surname = $surname;
         $user->nick = $nick;
         $user->email = $email;
+
+        //Subir la imagen
+        $image_path = $request->file('image_path');
+        if ($image_path) {
+            //Poner nombre unico (con time asigna un nombre unico)
+            $image_path_name = time().$image_path->getClientOriginalName();
+            //Guardar en la carpeta storage (storage/app/users)
+            Storage::disk('users')->put($image_path_name, File::get($image_path));
+            //seteo el nombre de la imagen en el objeto
+            $user->image = $image_path_name;
+        }
 
         //Ejecutar consulta y cambios en la BBDD
         $user->update();
