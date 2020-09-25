@@ -13,4 +13,10 @@ class ImageController extends Controller
     public function create(){
         return view('image.create');
     }
+
+    public function save(Request $request){
+        //var_dump($request);
+        //die();
+        echo('ok');
+    }
 }
