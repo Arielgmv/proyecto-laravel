@@ -15,8 +15,9 @@ class ImageController extends Controller
     }
 
     public function save(Request $request){
-        //var_dump($request);
-        //die();
-        echo('ok');
+        var_dump($request->input('image_path'));
+        var_dump($request->input('description'));
+        die();
+        //echo('ok');
     }
 }
