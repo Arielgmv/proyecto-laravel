@@ -14,10 +14,13 @@
                             </div>
                         @endif
                         <div class="data-user">
-                            {{$image->user->name.' '.$image->user->surname}}
-                            <span class="nickname">
-                                {{' | @'.$image->user->nick}}
-                            </span>
+                            <a href="{{ route('image.detail', ['id' => $image->id]) }}">
+                                {{$image->user->name.' '.$image->user->surname}}
+                                <span class="nickname">
+                                    {{' | @'.$image->user->nick}}
+                                </span>
+                            </a>
+
                         </div>
                     </div>
 
